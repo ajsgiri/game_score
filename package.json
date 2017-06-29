@@ -1,0 +1,20 @@
+{
+  "name": "game_score",
+  "version": "1.0.0",
+  "description": "keeps track of scores in games",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "player",
+    "score"
+  ],
+  "author": "Ajay Giri <ajasgiri@gmail.com> (ajaygiri.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}

@@ -10,7 +10,7 @@ module.exports = {
       healthDecrement: 25,
       difficulty: "easy", // easy, normal, difficult
       userPlay: false, // game is ongoing
-      gameComplete: false  // state of game completion
+      gameComplete: false,  // can't self reference using defaults.lives
     };
 
     this.game = config(defaults, overrides);
@@ -26,49 +26,34 @@ module.exports = {
     };
 
     this.user = config(defaults, overrides);
-
     return this.user;
   },
 
   incrementScore: function() {
-    return this.user.currentScore+=this.game.scoreIncrement;
+      this.user.currentScore+=this.game.scoreIncrement;
+      if (this.user.currentScore >= this.user.highScore) {
+        this.user.highScore = this.user.currentScore;
+      }
+      return this.user;
   },
 
   decrementHealth: function() {
-    if (this.user.health > this.game.healthDecrement) {
-      return this.user.health-=this.game.healthDecrement;
-    } else {
-      return this.loseLife();
-    }
+      this.user.health-=this.game.healthDecrement;
+      if (this.user.health <= 0) {
+        this.loseLife();
+      }
+      return this.user;
   },
 
   loseLife: function() {
-    if (this.currentScore > this.highScore) {
-      this.highScore = this.currentScore;
+    this.game.lives-=1;
+    if (this.game.lives <= 0) {
+      this.gameOver();
     }
-    if (this.game.lives > 1) {
-      this.game.lives-=1;
-      this.currentScore = 0;
-      health = 100;
-      return this.gameStop();
-    } else {
-      return this.gameOver();
-    }
-  },
-
-  gameStart: function() {
-    this.game.userPlay = true;
-  },
-
-  gameStop: function() {
-    this.game.userPlay = false;
+    return this.game;
   },
 
   gameOver: function() {
-    this.game.gameComplete = true;
-  },
-
-  replay: function() {
-    this.createUser();
+    return this.game;
   },
 };

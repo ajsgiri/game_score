@@ -34,10 +34,10 @@ module.exports = {
       return this.user;
   },
 
-  decrementHealth: function() {
+  decrementHealth: function(func) {
       this.user.health-=this.game.healthDecrement;
       if (this.user.health <= 0) {
-        this.loseLife();
+        this.loseLife(func);
       }
       return this.user;
   },

@@ -1,6 +1,6 @@
 {
   "name": "game_score",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "keeps track of scores in games",
   "main": "index.js",
   "scripts": {
